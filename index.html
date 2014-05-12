@@ -13,8 +13,8 @@
     <!-- App -->
     <script src="app.js"></script>
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link href="style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href="style/style.css" rel="stylesheet" />
 
     <title>Hearthstone Card App</title>
 </head>
@@ -66,7 +66,7 @@
         </div>
 
         <div class="row bump-20">
-            <div class="col-md-3" ng-repeat="card in cards | orderByPriority | filter: search" ng-click="selectCard($index)" ng-class="{'active' : $index === selectedIndex}">
+            <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="card in cards | orderByPriority | filter: search" ng-click="selectCard($index)" ng-class="{'active' : $index === selectedIndex}">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title card-name"><span class="pull-left">{{card.name}}</span><span class="pull-right">{{card.cost}}</span><span class="clearfix"></span></h4>
@@ -82,9 +82,6 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
 </body>
 </html>
