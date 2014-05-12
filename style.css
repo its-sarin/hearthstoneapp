@@ -1,0 +1,30 @@
+﻿.card   {
+    cursor: pointer;
+}
+
+.card span  {
+    display: none;
+}
+
+.card.active span   {
+    display: inline;
+}
+
+.card-body  {
+    height: 100px;
+}
+
+.card-name  {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.card-stats {
+    font-weight: bold;
+}
+
+/* Helper Classes */
+
+.bump-20    {
+    margin-top: 20px;
+}

@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/1.0.11/firebase.js"></script>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
+
+    <!-- AngularFire Library -->
+    <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+
+    <!-- App -->
+    <script src="app.js"></script>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href="style.css" rel="stylesheet" />
+
+    <title>Hearthstone Card App</title>
+</head>
+<body>
+    <div class="container" ng-controller="CardCtrl">
+        <div class="row">
+            Hero
+            <select ng-model="search.hero">
+                <option value="">All</option>
+                <option value="Nuetral">Neutral</option>
+                <option value="Druid">Druid</option>
+                <option value="Hunter">Hunter</option>
+                <option value="Mage">Mage</option>
+                <option value="Paladin">Paladin</option>
+                <option value="Priest">Priest</option>
+                <option value="Rogue">Rogue</option>
+                <option value="Shaman">Shaman</option>
+                <option value="Warlock">Warlock</option>
+                <option value="Warrior">Warrior</option>
+            </select>
+            Card Type
+            <select ng-model="search.card_type">
+                <option value="">All</option>
+                <option value="Minion">Minion</option>
+                <option value="Ability">Ability</option>
+            </select>
+            Keywords
+            <select ng-model="search.description">
+                <option value="">All</option>
+                <option value="Battlecry">Battlecry</option>
+                <option value="Charge">Charge</option>
+                <option value="Combo">Combo</option>
+                <option value="Deathrattle">Deathrattle</option>
+                <option value="Divine Shield">Divine Shield</option>
+                <option value="Enrage">Enrage</option>
+                <option value="Freeze">Freeze</option>
+                <option value="Immune">Immune</option>
+                <option value="Overload">Overload</option>
+                <option value="Secret">Secret</option>
+                <option value="Silence">Silence</option>
+                <option value="Spell Damage">Spell Damage</option>
+                <option value="Stealth">Stealth</option>
+                <option value="Taunt">Taunt</option>
+                <option value="Windfury">Windfury</option>
+            </select>
+            Cost <input type="text" value="" ng-model="search.cost" />
+            Description <input type="text" value="" ng-model="search.description" />
+            Name <input type="text" value="" ng-model="search.name" />
+        </div>
+
+        <div class="row bump-20">
+            <div class="col-md-3" ng-repeat="card in cards | orderByPriority | filter: search" ng-click="selectCard($index)" ng-class="{'active' : $index === selectedIndex}">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title card-name"><span class="pull-left">{{card.name}}</span><span class="pull-right">{{card.cost}}</span><span class="clearfix"></span></h4>
+                    </div>
+                    <div class="panel-body card-body">
+                        {{card.description}}
+                    </div>
+                    <div class="panel-footer card-stats">
+                        <span class="pull-left">{{card.attack || "&nbsp;"}} <span ng-show="card.attack">ATK</span></span>
+                        <span class="pull-right">{{card.defense}} <span ng-show="card.attack">DEF</span></span>
+                        <span class="clearfix"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</body>
+</html>
