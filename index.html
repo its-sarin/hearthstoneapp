@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <!-- Firebase -->
     <script src="https://cdn.firebase.com/js/client/1.0.11/firebase.js"></script>
 
@@ -11,7 +13,7 @@
     <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
 
     <!-- App -->
-    <script src="app.js"></script>
+    <script src="app/app.js"></script>
 
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link href="style/style.css" rel="stylesheet" />
@@ -19,57 +21,90 @@
     <title>Hearthstone Card App</title>
 </head>
 <body>
-    <div class="container" ng-controller="CardCtrl">
-        <div class="row">
-            Hero
-            <select ng-model="search.hero">
-                <option value="">All</option>
-                <option value="Nuetral">Neutral</option>
-                <option value="Druid">Druid</option>
-                <option value="Hunter">Hunter</option>
-                <option value="Mage">Mage</option>
-                <option value="Paladin">Paladin</option>
-                <option value="Priest">Priest</option>
-                <option value="Rogue">Rogue</option>
-                <option value="Shaman">Shaman</option>
-                <option value="Warlock">Warlock</option>
-                <option value="Warrior">Warrior</option>
-            </select>
-            Card Type
-            <select ng-model="search.card_type">
-                <option value="">All</option>
-                <option value="Minion">Minion</option>
-                <option value="Ability">Ability</option>
-            </select>
-            Keywords
-            <select ng-model="search.description">
-                <option value="">All</option>
-                <option value="Battlecry">Battlecry</option>
-                <option value="Charge">Charge</option>
-                <option value="Combo">Combo</option>
-                <option value="Deathrattle">Deathrattle</option>
-                <option value="Divine Shield">Divine Shield</option>
-                <option value="Enrage">Enrage</option>
-                <option value="Freeze">Freeze</option>
-                <option value="Immune">Immune</option>
-                <option value="Overload">Overload</option>
-                <option value="Secret">Secret</option>
-                <option value="Silence">Silence</option>
-                <option value="Spell Damage">Spell Damage</option>
-                <option value="Stealth">Stealth</option>
-                <option value="Taunt">Taunt</option>
-                <option value="Windfury">Windfury</option>
-            </select>
-            Cost <input type="text" value="" ng-model="search.cost" />
-            Description <input type="text" value="" ng-model="search.description" />
-            Name <input type="text" value="" ng-model="search.name" />
-        </div>
 
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="navbar-form navbar-left">
+            <div class="form-group">
+                <span class="white">Hero </span>
+                <select class="form-control" ng-model="search.hero">
+                    <option value="">All</option>
+                    <option value="Nuetral">Neutral</option>
+                    <option value="Druid">Druid</option>
+                    <option value="Hunter">Hunter</option>
+                    <option value="Mage">Mage</option>
+                    <option value="Paladin">Paladin</option>
+                    <option value="Priest">Priest</option>
+                    <option value="Rogue">Rogue</option>
+                    <option value="Shaman">Shaman</option>
+                    <option value="Warlock">Warlock</option>
+                    <option value="Warrior">Warrior</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <span class="white">Card Type </span>
+                <select class="form-control" ng-model="search.card_type">
+                    <option value="">All</option>
+                    <option value="Minion">Minion</option>
+                    <option value="Ability">Ability</option>
+                    <option value="Weapon">Weapon</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <span class="white">Keywords </span>
+                <select class="form-control" ng-model="search.description">
+                    <option value="">All</option>
+                    <option value="Battlecry">Battlecry</option>
+                    <option value="Charge">Charge</option>
+                    <option value="Combo">Combo</option>
+                    <option value="Deathrattle">Deathrattle</option>
+                    <option value="Divine Shield">Divine Shield</option>
+                    <option value="Enrage">Enrage</option>
+                    <option value="Freeze">Freeze</option>
+                    <option value="Immune">Immune</option>
+                    <option value="Overload">Overload</option>
+                    <option value="Secret">Secret</option>
+                    <option value="Silence">Silence</option>
+                    <option value="Spell Damage">Spell Damage</option>
+                    <option value="Stealth">Stealth</option>
+                    <option value="Taunt">Taunt</option>
+                    <option value="Windfury">Windfury</option>
+                </select>
+            </div>    
+            <div class="form-group">
+                <span class="white">Cost </span>
+                <select class="form-control" ng-model="search.cost">
+                    <option value="">All</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+        </div>
+        <div class="navbar-form navbar-left">     
+            <div class="form-group">
+                <span class="white">Description </span> <input class="form-control" type="text" value="" ng-model="search.description" />
+                <span class="white">Name </span> <input class="form-control" type="text" value="" ng-model="search.name" />
+            </div>      
+        </div>         
+    </nav> <!-- end: navbar -->
+
+    <div class="container" ng-controller="CardCtrl">
         <div class="row bump-20">
             <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="card in cards | orderByPriority | filter: search" ng-click="selectCard($index)" ng-class="{'active' : $index === selectedIndex}">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title card-name"><span class="pull-left">{{card.name}}</span><span class="pull-right">{{card.cost}}</span><span class="clearfix"></span></h4>
+                    </div>
+                    <div class="panel-footer card-details">
+                        {{card.hero}} - {{card.card_type}}
                     </div>
                     <div class="panel-body card-body">
                         {{card.description}}
@@ -82,6 +117,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> <!-- end: card display container -->
 </body>
 </html>
