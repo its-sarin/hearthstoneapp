@@ -28,7 +28,7 @@
                 <span class="white">Hero </span>
                 <select class="form-control" ng-model="search.hero">
                     <option value="">All</option>
-                    <option value="Nuetral">Neutral</option>
+                    <option value="Any">Neutral</option>
                     <option value="Druid">Druid</option>
                     <option value="Hunter">Hunter</option>
                     <option value="Mage">Mage</option>
@@ -42,16 +42,16 @@
             </div>
             <div class="form-group">
                 <span class="white">Card Type </span>
-                <select class="form-control" ng-model="search.card_type">
+                <select class="form-control" ng-model="search.type">
                     <option value="">All</option>
                     <option value="Minion">Minion</option>
-                    <option value="Ability">Ability</option>
+                    <option value="Spell">Ability</option>
                     <option value="Weapon">Weapon</option>
                 </select>
             </div>
             <div class="form-group">
                 <span class="white">Keywords </span>
-                <select class="form-control" ng-model="search.description">
+                <select class="form-control" ng-model="search.descr">
                     <option value="">All</option>
                     <option value="Battlecry">Battlecry</option>
                     <option value="Charge">Charge</option>
@@ -72,7 +72,7 @@
             </div>    
             <div class="form-group">
                 <span class="white">Cost </span>
-                <select class="form-control" ng-model="search.cost">
+                <select class="form-control" ng-model="search.mana">
                     <option value="">All</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -87,10 +87,20 @@
                     <option value="10">10</option>
                 </select>
             </div>
+            <div class="form-group">
+                <span class="white">Rarity </span>
+                <select class="form-control" ng-model="search.rarity">
+                    <option value="">All</option>
+                    <option value="Free">Free</option>
+                    <option value="Rare">Rare</option>
+                    <option value="Epic">Epic</option>
+                    <option value="Legendary">Legendary</option>
+                </select>
+            </div>
         </div>
         <div class="navbar-form navbar-left">     
             <div class="form-group">
-                <span class="white">Description </span> <input class="form-control" type="text" value="" ng-model="search.description" />
+                <span class="white">Description </span> <input class="form-control" type="text" value="" ng-model="search.descr" />
                 <span class="white">Name </span> <input class="form-control" type="text" value="" ng-model="search.name" />
             </div>      
         </div>         
@@ -98,20 +108,27 @@
 
     <div class="container" ng-controller="CardCtrl">
         <div class="row bump-20">
-            <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="card in cards | orderByPriority | filter: search" ng-click="selectCard($index)" ng-class="{'active' : $index === selectedIndex}">
-                <div class="panel panel-info">
+            <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="card in cards | orderByPriority | orderBy: 'name' | filter: search" ng-click="selectCard($index)" ng-class="{'active' : $index === selectedIndex}">
+                <div class="panel panel-warning">
                     <div class="panel-heading">
-                        <h4 class="panel-title card-name"><span class="pull-left">{{card.name}}</span><span class="pull-right">{{card.cost}}</span><span class="clearfix"></span></h4>
+                        <h4 class="panel-title card-name">
+                            <span class="pull-left">{{card.name}}</span>
+                            <span class="pull-right">{{card.mana}}</span>                            
+                        </h4>
+                        <span class="clearfix"></span>
                     </div>
                     <div class="panel-footer card-details">
-                        {{card.hero}} - {{card.card_type}}
+                        <span class="pull-left">{{card.hero}} - {{card.type}}</span>
+                        <span class="pull-right">{{card.rarity}}</span>
+                        <span class="clearfix"></span>
                     </div>
                     <div class="panel-body card-body">
-                        {{card.description}}
+                        {{card.descr}}
                     </div>
                     <div class="panel-footer card-stats">
-                        <span class="pull-left">{{card.attack || "&nbsp;"}} <span ng-show="card.attack">ATK</span></span>
-                        <span class="pull-right">{{card.defense}} <span ng-show="card.attack">DEF</span></span>
+                        <span class="pull-left" ng-show="card.attack || card.type === 'Minion'">{{card.attack}} ATK</span>
+                        &nbsp;                  
+                        <span class="pull-right" ng-show="card.health">{{card.health}} DEF</span>
                         <span class="clearfix"></span>
                     </div>
                 </div>
